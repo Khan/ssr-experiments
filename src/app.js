@@ -3,11 +3,7 @@ import Loadable from "react-loadable";
 
 const LoadableFoo = Loadable({
     loader: () => import("./foo.js"),
-    // modules: ['./foo.js'],
-    // webpack: () => [require.resolveWeak('./foo.js')],
-    loading() {
-        return <div>Loading...</div>;
-    },
+    loading: () => <div>Loading...</div>,
 });
 
 const MyApp = () => {

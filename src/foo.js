@@ -1,4 +1,10 @@
 import * as React from "react";
+import Loadable from "react-loadable";
+
+const LoadableBar = Loadable({
+    loader: () => import("./bar.js"),
+    loading: () => <div>Loading...</div>,
+});
 
 class Foo extends React.Component {
     constructor(props) {
@@ -15,7 +21,7 @@ class Foo extends React.Component {
             >
                 Click me!
             </button>
-            Click count: {this.state.count}
+            <LoadableBar count={this.state.count} />
         </div>
     }
 }
