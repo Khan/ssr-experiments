@@ -2,8 +2,14 @@ import * as React from "react";
 import Loadable from "react-loadable";
 
 const LoadableBar = Loadable({
-    loader: () => import("./bar.js"),
+    loader: () => {
+        return import("./bar.js");
+    },
     loading: () => <div>Loading...</div>,
+    // render(loaded, props) {
+    //     let Component = loaded.default;
+    //     return <Component {...props}/>;
+    // },
 });
 
 class Foo extends React.Component {

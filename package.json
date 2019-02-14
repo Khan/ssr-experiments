@@ -12,6 +12,7 @@
     "@babel/register": "^7.0.0",
     "babel-loader": "^8.0.5",
     "babel-plugin-dynamic-import-node": "^2.2.0",
+    "http-server": "^0.11.1",
     "webpack": "^4.29.3",
     "webpack-cli": "^3.2.3"
   },
@@ -29,6 +30,9 @@
   },
   "scripts": {
     "build": "webpack",
-    "watch": "webpack -w"
+    "watch": "webpack -w",
+    "clean": "rm -rf dist",
+    "ssr": "node server.js",
+    "no-ssr": "http-server ."
   }
 }

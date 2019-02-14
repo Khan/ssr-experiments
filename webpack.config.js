@@ -4,12 +4,7 @@ const { ReactLoadablePlugin } = require("react-loadable/webpack");
 module.exports = {
     mode: "development",
     entry: {
-        entryA: "./src/entryA.js",
-        // We create some extra entry points so that files are shared 
-        // between multiple chunks.  This facilitates async modules 
-        // ending up in different bundles.
-        entryB: "./src/entryB.js",
-        entryC: "./src/entryC.js",
+        entry: "./src/entry.js",
     },
     output: {
         publicPath: "dist/",
@@ -42,4 +37,5 @@ module.exports = {
             filename: './dist/react-loadable.json',
         }),
     ],
+    devtool: "source-map",
 };

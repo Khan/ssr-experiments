@@ -1,4 +1,14 @@
-require("@babel/register");
+require("@babel/register")({
+    presets: [
+        "@babel/preset-react", 
+        "@babel/preset-env",
+    ],
+    plugins: [
+        "@babel/plugin-syntax-dynamic-import", 
+        "dynamic-import-node",
+        "react-loadable/babel"
+    ]
+});
 const express = require("express");
 const React = require("react");
 const ReactDOMServer = require("react-dom/server");
@@ -34,7 +44,8 @@ app.get('/', (req, res) => {
                     // you can use the publicPath value from bundle, e.g:
                     // return `<script src="${bundle.publicPath}"></script>`
                   }).join('\n')}
-                <script src="/dist/entryA.bundle.js"></script>
+                <script src="/dist/vendors~entry.bundle.js"></script>
+                <script src="/dist/entry.bundle.js"></script>
             </body>
         </html>
     `);

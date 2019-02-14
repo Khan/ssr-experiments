@@ -8,4 +8,11 @@ This repo is for experimenting with different SSR solutions.
 - yarn start
 
 In a separate terminal run:
-- node server.js
+- yarn ssr
+
+In yet another terminal run:
+- yarn no-ssr
+
+Open:
+- http://localhost:3000 to see the SSR version in action
+- http://localhost:8080 to see the no-SSR version in action
