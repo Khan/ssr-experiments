@@ -7,8 +7,9 @@ This repo is for experimenting with different SSR solutions.
 - yarn
 - yarn start
 
-In a separate terminal run:
+In a separate terminal run either of:
 - yarn ssr
+- yarn jsdom-ssr
 
 In yet another terminal run:
 - yarn no-ssr

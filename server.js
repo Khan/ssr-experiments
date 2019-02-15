@@ -43,7 +43,7 @@ app.get('/', (req, res) => {
                     // alternatively if you are using publicPath option in webpack config
                     // you can use the publicPath value from bundle, e.g:
                     // return `<script src="${bundle.publicPath}"></script>`
-                  }).join('\n')}
+                }).join('\n')}
                 <script src="/dist/vendors~entry.bundle.js"></script>
                 <script src="/dist/entry.bundle.js"></script>
             </body>

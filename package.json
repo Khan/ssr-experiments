@@ -33,6 +33,7 @@
     "watch": "webpack -w",
     "clean": "rm -rf dist",
     "ssr": "node server.js",
+    "jsdom-ssr": "node jsdom-server.js",
     "no-ssr": "http-server ."
   }
 }
