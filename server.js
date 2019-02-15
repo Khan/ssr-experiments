@@ -21,6 +21,7 @@ const App = require("./src/app.js").default;
 const app = express();
 
 app.get('/', (req, res) => {
+    const start = Date.now();
     const modules = [];
 
     const html = ReactDOMServer.renderToString(
@@ -31,13 +32,15 @@ app.get('/', (req, res) => {
         ),
     );
 
-    const bundles = getBundles(stats, modules);
+    const bundles = getBundles(stats, modules)
+        .filter(bundle => !bundle.file.endsWith(".map"));
 
     res.send(`
         <!doctype html>
         <html lang="en">
             <body>
                 <div id="app">${html}</div>
+                <script>window.hydrate = true;</script>
                 ${bundles.map(bundle => {
                     return `<script src="/dist/${bundle.file}"></script>`
                     // alternatively if you are using publicPath option in webpack config
@@ -49,6 +52,7 @@ app.get('/', (req, res) => {
             </body>
         </html>
     `);
+    console.log(`request took ${Date.now() - start}ms`);
 });
 
 app.use("/dist", express.static("dist"));

@@ -7,7 +7,7 @@ import App from "./app.js";
 const element = document.getElementById("app");
 
 if (window.onModulesLoaded) {
-    // ssr
+    // server ssr
     const modules = [];
 
     ReactDOM.render(
@@ -19,6 +19,11 @@ if (window.onModulesLoaded) {
 
     Loadable.preloadAll().then(() => {
         window.onModulesLoaded(modules);
+    });
+} else if (window.hydrate) {
+    // non-jsdom ssr require rehydration
+    Loadable.preloadReady().then(() => {
+        ReactDOM.hydrate(<App/>, element);
     });
 } else {
     // no-ssr

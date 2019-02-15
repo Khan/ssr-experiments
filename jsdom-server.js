@@ -17,6 +17,7 @@ const template = (paths) => `
 `;
 
 app.get('/', (req, res) => {
+    const start = Date.now();
     const entries = ["vendors~entry.bundle.js", "entry.bundle.js"];
 
     const dom = new JSDOM(
@@ -26,21 +27,13 @@ app.get('/', (req, res) => {
             runScripts: "dangerously",
             resources: "usable",
             beforeParse: (window) => {
-                window.onModulesLoaded = (modules) => {
-                    const bundles = getBundles(stats, modules)
-                        .filter(bundle => !bundle.file.endsWith(".map"))
-                        .map(bundle => bundle.file);
-
-                    res.send(template([...bundles, ...entries]));
-
-                    // The following also works, but the aysnc bundles end up loaded
-                    // in <head> instead of in the the <body> where the entry point 
-                    // bundles are.
-                    // res.send(dom.serialize());
+                window.onModulesLoaded = () => {
+                    res.send(dom.serialize());
                 };
             },
         },
     );
+    console.log(`request took ${Date.now() - start}ms`);
 });
 
 app.use("/dist", express.static("dist"));
