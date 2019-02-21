@@ -1,15 +1,16 @@
 import * as React from "react";
 import Loadable from "react-loadable";
 
-const LoadableBar = Loadable({
-    loader: () => {
-        return import("./bar.js");
+const LoadableBar = Loadable.Map({
+    loader: {
+        Bar: () => import("./bar.js"),
+        StylesPromise: () => import("./styles.less"),
     },
     loading: () => <div>Loading...</div>,
-    // render(loaded, props) {
-    //     let Component = loaded.default;
-    //     return <Component {...props}/>;
-    // },
+    render(loaded, props) {
+        const Bar = loaded.Bar.default;
+        return <Bar {...props} />;
+    }
 });
 
 class Foo extends React.Component {
@@ -22,7 +23,8 @@ class Foo extends React.Component {
 
     render () {
         return <div>
-            <button 
+            <button
+                className="foo"
                 onClick={() => this.setState({count: this.state.count + 1})}
             >
                 Click me!

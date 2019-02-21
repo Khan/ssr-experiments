@@ -20,6 +20,8 @@ const App = require("./src/app.js").default;
 
 const app = express();
 
+require.extensions[".less"] = (mod, filename) => {};
+
 app.get('/', (req, res) => {
     const start = Date.now();
     const modules = [];

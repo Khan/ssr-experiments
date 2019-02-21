@@ -1,9 +1,16 @@
 import * as React from "react";
 import Loadable from "react-loadable";
 
-const LoadableFoo = Loadable({
-    loader: () => import("./foo.js"),
+const LoadableFoo = Loadable.Map({
+    loader: {
+        Foo: () => import("./foo.js"),
+        StylesPromise: () => import("./styles.less"),
+    },
     loading: () => <div>Loading...</div>,
+    render(loaded, props) {
+        const Foo = loaded.Foo.default;
+        return <Foo {...props} />;
+    }
 });
 
 const MyApp = () => {
