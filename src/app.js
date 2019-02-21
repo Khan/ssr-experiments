@@ -13,7 +13,7 @@ const LoadableFoo = Loadable.Map({
     }
 });
 
-const MyApp = () => {
+const App = () => {
     return <div>
         <h1>Hello, world!</h1>
         <p>This is my awesome app</p>
@@ -21,4 +21,4 @@ const MyApp = () => {
     </div>;
 };
 
-export default MyApp;
+export default App;
