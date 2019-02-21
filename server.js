@@ -34,17 +34,26 @@ app.get('/', (req, res) => {
         ),
     );
 
-    const bundles = getBundles(stats, modules)
-        .filter(bundle => !bundle.file.endsWith(".map"));
+    const files = getBundles(stats, modules)
+        .filter(bundle => !bundle.file.endsWith(".map"))
+        .map(bundle => bundle.file);
+
+    const jsFiles = files.filter(file => file.endsWith(".js"));
+    const cssFiles = new Set(files.filter(file => file.endsWith(".css")));
 
     res.send(`
         <!doctype html>
         <html lang="en">
+            <head>
+                ${[...cssFiles].map(file => {
+                    return `<link rel="stylesheet" href="/dist/${file}"/>`
+                }).join('\n')}
+            </head>
             <body>
                 <div id="app">${html}</div>
                 <script>window.hydrate = true;</script>
-                ${bundles.map(bundle => {
-                    return `<script src="/dist/${bundle.file}"></script>`
+                ${jsFiles.map(file => {
+                    return `<script src="/dist/${file}"></script>`
                     // alternatively if you are using publicPath option in webpack config
                     // you can use the publicPath value from bundle, e.g:
                     // return `<script src="${bundle.publicPath}"></script>`
