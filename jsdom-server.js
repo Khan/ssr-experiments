@@ -1,8 +1,6 @@
 const express = require("express");
 const jsdom = require("jsdom");
 const {JSDOM} = jsdom;
-const {getBundles} = require('react-loadable/webpack');
-const stats = require("./dist/react-loadable.json");
 
 const app = express();
 
